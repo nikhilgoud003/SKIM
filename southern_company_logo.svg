@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 104" role="img" aria-label="Southern Company">
+  <defs>
+    <clipPath id="outer">
+      <polygon points="60,6 114,98 6,98"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#outer)">
+    <polygon points="60,6 114,98 6,98" fill="#ffffff"/>
+    <polygon points="60,10 108,94 12,94" fill="#E31837"/>
+    <polygon points="60,10 108,94 60,58" fill="#E31837"/>
+    <polygon points="12,94 42,94 60,74" fill="#78BE20"/>
+    <polygon points="42,94 78,94 60,74" fill="#00A3E0"/>
+    <polygon points="78,94 108,94 60,74" fill="#003DA5"/>
+  </g>
+  <polygon points="60,6 114,98 6,98" fill="none" stroke="#ffffff" stroke-width="3"/>
+  <line x1="12" y1="94" x2="108" y2="94" stroke="#ffffff" stroke-width="2.5"/>
+  <line x1="42" y1="94" x2="60" y2="74" stroke="#ffffff" stroke-width="2"/>
+  <line x1="78" y1="94" x2="60" y2="74" stroke="#ffffff" stroke-width="2"/>
+  <line x1="12" y1="94" x2="108" y2="94" stroke="#ffffff" stroke-width="0"/>
+</svg>

@@ -1,0 +1,479 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+#aw{display:flex;flex-direction:column;align-items:center;gap:10px;padding:1rem 0;min-height:780px;}
+#ph{width:360px;height:720px;border-radius:36px;overflow:hidden;border:0.5px solid rgba(0,0,0,.12);position:relative;font-family:var(--font-sans);}
+#rt{width:100%;height:100%;position:relative;overflow:hidden;}
+.tb{position:absolute;top:0;left:0;right:0;height:76px;padding:14px 16px 0;background:rgba(255,255,255,.93);border-bottom:.5px solid rgba(0,0,0,.06);display:flex;align-items:center;justify-content:space-between;z-index:10;}
+.bb{position:absolute;bottom:0;left:0;right:0;height:86px;background:rgba(255,255,255,.93);border-top:.5px solid rgba(0,0,0,.06);display:flex;align-items:center;z-index:10;padding:10px 20px 18px;gap:10px;}
+.wm{color:#1B3A5C;font-size:16px;font-weight:600;letter-spacing:.04em;}
+.mt{display:flex;background:rgba(0,0,0,.07);border-radius:20px;padding:2px;gap:1px;}
+.mb{padding:5px 14px;border-radius:18px;font-size:12px;font-weight:500;color:rgba(0,0,0,.45);cursor:pointer;border:none;background:transparent;font-family:inherit;transition:all .2s;}
+.mb.on{background:#1B3A5C;color:#fff;}
+.ip{background:rgba(0,0,0,.07);border-radius:16px;padding:3px 10px;font-size:11px;color:rgba(0,0,0,.5);}
+.fab{width:54px;height:54px;border-radius:50%;background:#E84040;color:#fff;border:none;cursor:pointer;font-size:24px;display:flex;align-items:center;justify-content:center;font-family:inherit;flex-shrink:0;}
+.fabsm{width:44px;height:44px;border-radius:50%;background:#E84040;color:#fff;border:none;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;font-family:inherit;flex-shrink:0;}
+.cpfab{width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.08);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;}
+.cpfab:hover{background:rgba(0,0,0,.13);}
+.amber-dot{position:absolute;top:-2px;right:-2px;width:12px;height:12px;border-radius:50%;background:#F59E0B;border:2.5px solid rgba(255,255,255,.95);}
+.pm{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:5;transition:transform .15s;}
+.pm:hover{transform:translate(-50%,-50%) scale(1.18);}
+.pc{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:700;border:3px solid rgba(255,255,255,.95);}
+.new-lbl{position:absolute;top:-18px;left:50%;transform:translateX(-50%);background:#059669;color:#fff;font-size:8px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap;letter-spacing:.04em;}
+.sh{position:absolute;bottom:0;left:0;right:0;background:var(--color-background-primary);border-radius:24px 24px 0 0;border-top:.5px solid var(--color-border-tertiary);padding:10px 18px 34px;z-index:30;}
+.hdl{width:36px;height:4px;background:var(--color-border-secondary);border-radius:2px;margin:0 auto 16px;}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.co{border-radius:14px;border:.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);padding:16px 8px 12px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:7px;font-family:inherit;}
+.co:hover{background:var(--color-background-tertiary);}
+.ci{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.cn{font-size:13px;font-weight:500;color:var(--color-text-primary);}
+.cs{font-size:11px;color:var(--color-text-secondary);text-align:center;}
+.cb{width:100%;margin-top:10px;padding:11px;border-radius:14px;border:.5px solid var(--color-border-tertiary);background:transparent;font-size:14px;color:var(--color-text-secondary);cursor:pointer;font-family:inherit;}
+.ov{position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:20;display:flex;flex-direction:column;justify-content:flex-end;}
+.pcard{background:var(--color-background-primary);border-radius:24px 24px 0 0;border-top:.5px solid var(--color-border-tertiary);max-height:580px;display:flex;flex-direction:column;}
+.pcH{padding:13px 16px 11px;border-bottom:.5px solid var(--color-border-tertiary);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.pb{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:12px;font-size:12px;font-weight:500;}
+.pcB{padding:13px 16px 24px;overflow-y:auto;flex:1;}
+.vrow{display:flex;align-items:center;gap:9px;margin-bottom:9px;}
+.vav{width:34px;height:34px;border-radius:50%;background:var(--color-background-info);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:var(--color-text-info);flex-shrink:0;}
+.pnote{font-size:13px;color:var(--color-text-primary);line-height:1.65;margin-bottom:10px;}
+.ar{display:flex;align-items:center;gap:9px;padding:9px 11px;background:var(--color-background-secondary);border-radius:12px;margin-bottom:2px;}
+.apb{width:30px;height:30px;border-radius:50%;background:var(--color-background-info);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;flex-shrink:0;}
+.atr{flex:1;height:3px;background:var(--color-border-tertiary);border-radius:2px;}
+.apr{height:100%;background:#007AFF;border-radius:2px;transition:width .25s;}
+.px2{background:var(--color-background-secondary);border:none;color:var(--color-text-secondary);width:27px;height:27px;border-radius:50%;cursor:pointer;font-size:12px;font-family:inherit;display:flex;align-items:center;justify-content:center;}
+.als{width:100%;height:100%;background:var(--color-background-primary);display:flex;flex-direction:column;}
+.alH{padding:48px 16px 12px;border-bottom:.5px solid var(--color-border-tertiary);}
+.abk{background:transparent;border:.5px solid var(--color-border-secondary);padding:4px 11px;border-radius:12px;font-size:11px;cursor:pointer;color:var(--color-text-primary);font-family:inherit;margin-bottom:8px;}
+.asc{flex:1;overflow-y:auto;}
+.ai{padding:12px 16px;border-bottom:.5px solid var(--color-border-tertiary);cursor:pointer;display:flex;align-items:flex-start;gap:9px;}
+.ai:hover{background:var(--color-background-secondary);}
+.adot{width:30px;height:30px;min-width:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;}
+.vs{width:100%;height:100%;background:#0D1117;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;position:relative;}
+.vbk{position:absolute;top:14px;left:14px;background:rgba(255,255,255,.1);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;}
+.rbw{position:relative;width:128px;height:128px;display:flex;align-items:center;justify-content:center;}
+.rbtn{width:80px;height:80px;border-radius:50%;background:#E84040;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;position:relative;font-family:inherit;}
+@keyframes ro{0%{width:80px;height:80px;opacity:.5;}100%{width:148px;height:148px;opacity:0;}}
+.rr{position:absolute;border-radius:50%;border:2px solid #E84040;top:50%;left:50%;transform:translate(-50%,-50%);}
+.r1{animation:ro 1.6s ease-out infinite;}
+.r2{animation:ro 1.6s ease-out .55s infinite;}
+@keyframes wb0{0%,100%{height:5px;}50%{height:24px;}}
+@keyframes wb1{0%,100%{height:4px;}50%{height:30px;}}
+@keyframes wb2{0%,100%{height:7px;}50%{height:20px;}}
+@keyframes wb3{0%,100%{height:5px;}50%{height:27px;}}
+.wb{width:3px;border-radius:2px;min-height:4px;}
+.wbs{display:flex;align-items:center;gap:3px;height:32px;}
+.wb:nth-child(1){animation:wb0 .8s ease-in-out infinite 0s;}
+.wb:nth-child(2){animation:wb1 .8s ease-in-out infinite .1s;}
+.wb:nth-child(3){animation:wb2 .8s ease-in-out infinite .2s;}
+.wb:nth-child(4){animation:wb1 .8s ease-in-out infinite .05s;}
+.wb:nth-child(5){animation:wb0 .8s ease-in-out infinite .15s;}
+.wb:nth-child(6){animation:wb3 .8s ease-in-out infinite .1s;}
+.wb:nth-child(7){animation:wb2 .8s ease-in-out infinite .25s;}
+.wb:nth-child(8){animation:wb0 .8s ease-in-out infinite .05s;}
+.catG{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;}
+.cat{border-radius:12px;padding:10px 8px;border:.5px solid var(--color-border-tertiary);background:var(--color-background-secondary);cursor:pointer;display:flex;align-items:center;gap:7px;font-family:inherit;}
+.cat:hover{background:var(--color-background-tertiary);}
+.cdot{width:13px;height:13px;border-radius:50%;min-width:13px;}
+.catl{font-size:12px;font-weight:500;color:var(--color-text-primary);}
+.cps{width:100%;height:100%;background:var(--color-background-primary);display:flex;flex-direction:column;}
+.cpHd{padding:48px 16px 14px;border-bottom:.5px solid var(--color-border-tertiary);flex-shrink:0;}
+.cpsc{flex:1;overflow-y:auto;padding:16px;}
+.cpft{padding:12px 16px 22px;border-top:.5px solid var(--color-border-tertiary);flex-shrink:0;}
+.qblk{border-radius:12px;padding:14px;margin-bottom:12px;background:var(--color-background-secondary);border:.5px solid var(--color-border-tertiary);}
+.qblk.filled{border-color:var(--color-border-success);background:var(--color-background-success);}
+.qblk.active{border-color:#1B3A5C;background:var(--color-background-primary);}
+.qnum{font-size:11px;font-weight:600;color:var(--color-text-secondary);letter-spacing:.06em;margin-bottom:4px;text-transform:uppercase;}
+.qlbl{font-size:13px;font-weight:500;color:var(--color-text-primary);line-height:1.4;margin-bottom:10px;}
+.qinrow{display:flex;align-items:center;gap:8px;}
+.qinput{flex:1;border:.5px solid var(--color-border-secondary);border-radius:10px;padding:9px 12px;font-size:13px;font-family:inherit;background:var(--color-background-primary);color:var(--color-text-primary);outline:none;}
+.qinput:focus{border-color:#1B3A5C;}
+.qmic{width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;background:rgba(0,0,0,.07);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:inherit;transition:background .2s;}
+.qwv{display:none;align-items:center;gap:3px;padding-top:8px;}
+.subbtn{width:100%;padding:12px;border-radius:14px;background:#059669;color:#fff;font-size:14px;font-weight:500;border:none;cursor:pointer;font-family:inherit;transition:opacity .2s;}
+.subbtn:disabled{opacity:.34;cursor:not-allowed;}
+.sbar{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.07);border-radius:14px;padding:8px 14px;cursor:pointer;flex:1;}
+.sbpl{color:rgba(0,0,0,.4);font-size:13px;}
+.bub{width:100%;margin-top:10px;padding:10px;border-radius:12px;background:var(--color-background-secondary);border:.5px solid var(--color-border-secondary);font-size:12px;cursor:pointer;color:var(--color-text-primary);font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;}
+</style>
+
+<h2 class="sr-only">SKIM — field knowledge app with light warm map, typeable job checkpoint with voice input option, and cross-mode pin visibility between James and Marcus</h2>
+<div id="aw">
+  <div id="ph"><div id="rt"></div></div>
+  <p style="font-size:12px;color:var(--color-text-secondary);text-align:center;max-width:360px;line-height:1.6;">
+    <strong>James:</strong> <strong>+</strong> adds knowledge · clipboard in bottom-right = job checkpoint (amber = in progress)<br>
+    <strong>Marcus:</strong> search for address notes · <strong>+</strong> adds observations · tap any pin
+  </p>
+</div>
+
+<script>
+const rt=document.getElementById('rt');
+
+const MAP=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 720" style="position:absolute;inset:0;width:100%;height:100%;display:block"><rect width="360" height="720" fill="#F0EBE0"/><rect x="0" y="0" width="86" height="90" fill="#E5DED2"/><rect x="96" y="0" width="90" height="90" fill="#E5DED2"/><rect x="196" y="0" width="84" height="90" fill="#E5DED2"/><rect x="290" y="0" width="70" height="90" fill="#E5DED2"/><rect x="0" y="100" width="86" height="100" fill="#E5DED2"/><rect x="96" y="100" width="90" height="100" fill="#E5DED2"/><rect x="196" y="100" width="84" height="100" fill="#E5DED2"/><rect x="290" y="100" width="70" height="100" fill="#E5DED2"/><rect x="0" y="210" width="86" height="110" fill="#E5DED2"/><rect x="96" y="210" width="90" height="110" fill="#E5DED2"/><rect x="196" y="210" width="84" height="110" fill="#E5DED2"/><rect x="290" y="210" width="70" height="110" fill="#E5DED2"/><rect x="0" y="330" width="86" height="120" fill="#E5DED2"/><rect x="96" y="330" width="90" height="120" fill="#E5DED2"/><rect x="196" y="330" width="84" height="120" fill="#E5DED2"/><rect x="290" y="330" width="70" height="120" fill="#E5DED2"/><rect x="0" y="460" width="86" height="120" fill="#E5DED2"/><rect x="96" y="460" width="90" height="120" fill="#E5DED2"/><rect x="196" y="460" width="84" height="120" fill="#E5DED2"/><rect x="290" y="460" width="70" height="120" fill="#E5DED2"/><rect x="0" y="590" width="86" height="130" fill="#E5DED2"/><rect x="96" y="590" width="90" height="130" fill="#E5DED2"/><rect x="196" y="590" width="84" height="130" fill="#E5DED2"/><rect x="290" y="590" width="70" height="130" fill="#E5DED2"/><rect x="2" y="332" width="82" height="116" fill="#D6EDCA"/><rect x="86" y="0" width="10" height="720" fill="#FFFFFF"/><rect x="186" y="0" width="10" height="720" fill="#FFFFFF"/><rect x="280" y="0" width="10" height="720" fill="#FFFFFF"/><rect x="0" y="90" width="360" height="10" fill="#FFFFFF"/><rect x="0" y="200" width="360" height="10" fill="#FFFFFF"/><rect x="0" y="320" width="360" height="10" fill="#FFFFFF"/><rect x="0" y="450" width="360" height="10" fill="#FFFFFF"/><rect x="0" y="580" width="360" height="10" fill="#FFFFFF"/><polygon points="172,0 184,0 222,720 210,720" fill="#FFFFFF"/><rect x="0" y="148" width="360" height="4" fill="#F5EEE5"/><rect x="0" y="268" width="360" height="4" fill="#F5EEE5"/><rect x="0" y="397" width="360" height="4" fill="#F5EEE5"/><rect x="0" y="524" width="360" height="4" fill="#F5EEE5"/><rect x="36" y="0" width="4" height="720" fill="#F5EEE5"/><rect x="240" y="0" width="4" height="720" fill="#F5EEE5"/><rect x="335" y="0" width="4" height="720" fill="#F5EEE5"/><text x="188" y="88" fill="rgba(80,60,40,.32)" font-size="6" font-family="Arial" letter-spacing=".7">PEACHTREE ST NW</text><text x="8" y="108" fill="rgba(80,60,40,.32)" font-size="6" font-family="Arial" letter-spacing=".5">NORTH AVE NW</text><text x="8" y="218" fill="rgba(80,60,40,.32)" font-size="6" font-family="Arial" letter-spacing=".5">PONCE DE LEON AVE</text><text x="8" y="338" fill="rgba(80,60,40,.32)" font-size="6" font-family="Arial" letter-spacing=".5">BOULEVARD NE</text><text x="8" y="468" fill="rgba(80,60,40,.32)" font-size="6" font-family="Arial" letter-spacing=".5">MEMORIAL DR SE</text><text x="20" y="388" fill="rgba(40,120,40,.4)" font-size="7" font-family="Arial">PARK</text></svg>`;
+
+const P1=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 296 148" style="display:block;width:100%;border-radius:8px;margin-bottom:10px"><rect width="296" height="148" fill="#1A2030"/><text x="8" y="13" fill="rgba(180,210,240,.28)" font-size="7.5" font-family="Arial">Field diagram · 1205 Hollowell Pkwy · James Carter</text><circle cx="148" cy="82" r="48" fill="none" stroke="#3A5878" stroke-width="1.5" stroke-dasharray="5,4"/><circle cx="148" cy="82" r="35" fill="none" stroke="#5A80A8" stroke-width="2.5"/><circle cx="148" cy="82" r="18" fill="#22303F" stroke="#7AA0C8" stroke-width="1.5"/><circle cx="148" cy="82" r="5" fill="#385068"/><line x1="188" y1="48" x2="165" y2="67" stroke="#F59E0B" stroke-width="1" stroke-dasharray="3,2"/><text x="191" y="44" fill="#F59E0B" font-size="8" font-family="Arial">4in — should be 6in</text><text x="148" y="141" fill="rgba(140,175,215,.4)" font-size="7.5" font-family="Arial" text-anchor="middle">Cast iron main 1962 · diagonal run · unmarked on all maps</text></svg>`;
+
+const P2=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 296 148" style="display:block;width:100%;border-radius:8px;margin-bottom:10px"><rect width="296" height="148" fill="#1A2030"/><text x="8" y="13" fill="rgba(180,210,240,.28)" font-size="7.5" font-family="Arial">Field photo · Regulator top cap · 680 Spring St NW · James Carter</text><rect x="92" y="32" width="112" height="80" rx="4" fill="#222E3C" stroke="#3D5A78" stroke-width="1.5"/><rect x="42" y="64" width="50" height="15" fill="#222E3C" stroke="#3D5A78" stroke-width="1.5"/><rect x="204" y="64" width="50" height="15" fill="#222E3C" stroke="#3D5A78" stroke-width="1.5"/><circle cx="148" cy="50" r="13" fill="#18262E" stroke="#5A80A8" stroke-width="1.5"/><polyline points="138,88 146,97 156,85 163,93" stroke="#E84040" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="150" cy="90" r="12" fill="rgba(232,64,64,.12)" stroke="#E84040" stroke-width="1.5"/><line x1="184" y1="112" x2="160" y2="94" stroke="#E84040" stroke-width="1.5" stroke-dasharray="3,2"/><text x="186" y="114" fill="#FF7070" font-size="8" font-family="Arial">crack here</text><text x="148" y="141" fill="rgba(140,175,215,.4)" font-size="7.5" font-family="Arial" text-anchor="middle">Annual crack pattern · Dec–Feb · replace top cap before Nov</text></svg>`;
+
+const PINS=[
+  {id:1,x:44,y:140,color:'#DC2626',icon:'!',type:'Safety Warning',bg:'rgba(220,38,38,.12)',address:'847 Maple St NW',isNew:false,
+   comments:[
+    {a:'James Carter',ini:'JC',t:28,text:'Unmarked cast iron line from 1962 runs diagonally under the NW corner. Never on official maps. Hand dig only within 15 ft of the meter.',audio:true,img:null},
+    {a:'Robert Mills',ini:'RM',t:22,text:'Confirmed James\'s note. Spray-painted orange marker on NW corner sidewalk. Re-mark every spring before construction season.',audio:false,img:null},
+    {a:'Darnell Hayes',ini:'DH',t:8,text:'Marker still visible. Added to crew pre-job briefing sheet. All northwest crew are now aware.',audio:false,img:null},
+   ]},
+  {id:2,x:136,y:252,color:'#D97706',icon:'⚙',type:'Equipment Quirk',bg:'rgba(217,119,6,.12)',address:'592 Northside Dr SW',isNew:false,
+   comments:[
+    {a:'Robert Mills',ini:'RM',t:22,text:'Regulator needs old-style wrench, not standard kit. Strips easily at standard torque. Always check thread before applying torque.',audio:true,img:null},
+    {a:'Sandra Lee',ini:'SL',t:19,text:'Ordered 3 old-style wrenches for the northwest crew van. Marked compartment B-4.',audio:false,img:null},
+   ]},
+  {id:3,x:248,y:372,color:'#2563EB',icon:'↺',type:'Historical Pattern',bg:'rgba(37,99,235,.12)',address:'1205 Hollowell Pkwy',isNew:false,
+   comments:[
+    {a:'James Carter',ini:'JC',t:28,text:'Zone 3 drops pressure every January below 25°F. Undersized 1987 main — see diagram. Always check Zone 3 valve first, never the meter.',audio:true,img:'P1'},
+    {a:'Sandra Lee',ini:'SL',t:19,text:'Pattern confirmed twice this winter. Flagged for FY2026 capital plan. Engineering is tracking it.',audio:false,img:null},
+   ]},
+  {id:4,x:320,y:196,color:'#059669',icon:'✓',type:'Field Tip',bg:'rgba(5,150,105,.12)',address:'2100 Defoor Hills Rd NW',isNew:false,
+   comments:[
+    {a:'Sandra Lee',ini:'SL',t:19,text:'Park east side only — west floods in heavy rain and you\'ll be stuck till noon.',audio:false,img:null},
+   ]},
+  {id:5,x:150,y:502,color:'#7C3AED',icon:'♪',type:'Voice Note',bg:'rgba(124,58,237,.12)',address:'375 Ralph McGill Blvd NE',isNew:false,
+   comments:[
+    {a:'Marcus Jones',ini:'MJ',t:31,text:'Meter reads low in summer but usage is normal. Thermal expansion in measurement device. Do not replace without consulting engineering.',audio:true,img:null},
+    {a:'James Carter',ini:'JC',t:28,text:'Engineering confirmed calibration drift, not a leak. Filed under account #7734.',audio:false,img:null},
+   ]},
+  {id:6,x:308,y:508,color:'#0891B2',icon:'▶',type:'Video Pin',bg:'rgba(8,145,178,.12)',address:'680 Spring St NW',isNew:false,
+   comments:[
+    {a:'James Carter',ini:'JC',t:28,text:'Top cap crack forms every winter on this regulator — see photo. Replace before December each year. Do not wait for failure.',audio:true,img:'P2'},
+    {a:'Robert Mills',ini:'RM',t:22,text:'Replacement scheduled Nov 14. Ordered part #RC-4420B. In winter maintenance calendar.',audio:false,img:null},
+   ]},
+];
+
+const CP_QUESTIONS=[
+  'Anything unusual about this equipment today?',
+  'What would you tell a new tech coming here for the first time?',
+  'Any history on this asset worth knowing?'
+];
+
+let S={
+  screen:'map',mode:'james',ov:null,pin:null,
+  rec:0,cpRecQ:-1,
+  cpText:['Found minor corrosion on the west-facing meter base — not urgent, monitor next visit.','',''],
+  cpInProgress:true,cpDone:false,
+  aprog:35,apl:false,
+  checkpointPins:[]
+};
+let aInt=null;
+
+function R(){
+  if(S.screen==='map') rt.innerHTML=mapH();
+  else if(S.screen==='voice') rt.innerHTML=voiceH();
+  else if(S.screen==='cp') rt.innerHTML=cpH();
+}
+
+function allP(){return[...PINS,...S.checkpointPins];}
+function cpFilled(){return S.cpText.every(t=>t&&t.trim().length>0);}
+
+function topbar(){
+  const r=S.ov
+    ?`<button class="px2" onclick="closeOv()"><i class="ti ti-x" style="font-size:12px" aria-hidden="true"></i></button>`
+    :`<span class="ip">${allP().length} pins</span>`;
+  return`<div class="tb"><span class="wm">SKIM</span><div class="mt"><button class="mb ${S.mode==='james'?'on':''}" onclick="setMode('james')">James</button><button class="mb ${S.mode==='marcus'?'on':''}" onclick="setMode('marcus')">Marcus</button></div>${r}</div>`;
+}
+
+function pinsH(){
+  return allP().map(p=>`<div class="pm" style="left:${p.x}px;top:${p.y}px" onclick="clickPin(${p.id})">
+    ${p.isNew?'<div class="new-lbl">NEW</div>':''}
+    <div class="pc" style="background:${p.color}">${p.icon}</div>
+  </div>`).join('');
+}
+
+function btmbar(){
+  if(S.ov) return'';
+  if(S.mode==='james'){
+    return`<div class="bb" style="justify-content:space-between">
+      <button class="fab" onclick="openCap()" aria-label="Add knowledge to map">+</button>
+      <div style="position:relative">
+        <button class="cpfab" onclick="openCp()" aria-label="Job checkpoint">
+          <i class="ti ti-clipboard" style="font-size:19px;color:#1B3A5C" aria-hidden="true"></i>
+        </button>
+        ${S.cpInProgress?'<span class="amber-dot"></span>':''}
+      </div>
+    </div>`;
+  }
+  return`<div class="bb" style="justify-content:space-between">
+    <div class="sbar" onclick="showAddr()">
+      <i class="ti ti-search" style="color:rgba(0,0,0,.35);font-size:14px" aria-hidden="true"></i>
+      <span class="sbpl">Search address or tap a pin</span>
+    </div>
+    <button class="fabsm" onclick="openCap()" aria-label="Add observation">+</button>
+  </div>`;
+}
+
+function ovH(){
+  if(!S.ov) return'';
+  if(S.ov==='cap') return capOv();
+  if(S.ov==='pin') return pinOv();
+  if(S.ov==='addr') return addrOv();
+  if(S.ov==='done') return doneOv();
+  return'';
+}
+
+function mapH(){return MAP+topbar()+pinsH()+ovH()+btmbar();}
+
+function capOv(){
+  const isM=S.mode==='marcus';
+  return`<div class="sh">
+    <div class="hdl"></div>
+    <div style="font-size:15px;font-weight:500;color:var(--color-text-primary);margin-bottom:14px">${isM?'Add observation':'Add to map'}</div>
+    <div class="cg">
+      <button class="co" onclick="openVoice()"><div class="ci" style="background:rgba(220,38,38,.1)"><i class="ti ti-microphone" style="color:#DC2626;font-size:22px" aria-hidden="true"></i></div><span class="cn">Voice note</span><span class="cs">Tap to record.</span></button>
+      <button class="co" onclick="openVoice()"><div class="ci" style="background:rgba(217,119,6,.1)"><i class="ti ti-camera" style="color:#D97706;font-size:22px" aria-hidden="true"></i></div><span class="cn">Photo pin</span><span class="cs">Photo + note.</span></button>
+      <button class="co" onclick="openVoice()"><div class="ci" style="background:rgba(8,145,178,.1)"><i class="ti ti-video" style="color:#0891B2;font-size:22px" aria-hidden="true"></i></div><span class="cn">Video pin</span><span class="cs">Film asset.</span></button>
+      ${isM?`<button class="co" onclick="closeOv()"><div class="ci" style="background:rgba(124,58,237,.1)"><i class="ti ti-bookmark" style="color:#7C3AED;font-size:22px" aria-hidden="true"></i></div><span class="cn">Bookmark</span><span class="cs">Save for later.</span></button>`:`<button class="co" onclick="openCp()"><div class="ci" style="background:rgba(5,150,105,.1)"><i class="ti ti-check" style="color:#059669;font-size:22px" aria-hidden="true"></i></div><span class="cn">Checkpoint</span><span class="cs">3 quick notes.</span></button>`}
+    </div>
+    <button class="cb" onclick="closeOv()">Cancel</button>
+  </div>`;
+}
+
+function commentHtml(c,i){
+  const imgHtml=c.img==='P1'?P1:c.img==='P2'?P2:'';
+  const sep=i>0?'border-top:.5px solid var(--color-border-tertiary);padding-top:12px;margin-top:12px':'';
+  return`<div style="${sep}">
+    <div class="vrow">
+      <div class="vav">${c.ini}</div>
+      <div><div style="font-size:13px;font-weight:500;color:var(--color-text-primary)">${c.a}</div>
+      ${c.t>0?`<div style="font-size:11px;color:var(--color-text-secondary)">${c.t} yrs experience</div>`:''}
+      </div>
+    </div>
+    ${imgHtml}<p class="pnote">${c.text}</p>
+    ${c.audio?`<div class="ar">
+      <button class="apb" onclick="togAudio()" aria-label="Play">
+        <i class="ti ti-player-play" id="aico" style="font-size:12px;color:var(--color-text-info)" aria-hidden="true"></i>
+      </button>
+      <div class="atr"><div class="apr" id="apr" style="width:${S.aprog}%"></div></div>
+      <span style="font-size:11px;color:var(--color-text-secondary);min-width:26px">0:${String(Math.round(S.aprog/100*44)).padStart(2,'0')}</span>
+    </div>`:''}
+  </div>`;
+}
+
+function pinOv(){
+  const p=allP().find(x=>x.id===S.pin);
+  if(!p) return'';
+  if(p.isCheckpoint){
+    return`<div class="ov" onclick="if(event.target===this)closeOv()">
+      <div class="pcard">
+        <div class="pcH">
+          <div class="pb" style="background:${p.bg};color:${p.color}"><span>✓</span><span>${p.type}</span></div>
+          <button class="px2" onclick="closeOv()" aria-label="Close"><i class="ti ti-x" style="font-size:12px" aria-hidden="true"></i></button>
+        </div>
+        <div class="pcB">
+          ${(p.answers||[]).map((ans,i)=>`<p style="font-size:13px;color:var(--color-text-primary);line-height:1.65;${i>0?'border-top:.5px solid var(--color-border-tertiary);padding-top:12px;margin-top:12px':''}">${ans||'—'}</p>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  }
+  const cs=(p.comments||[]).map((c,i)=>commentHtml(c,i)).join('');
+  const act=S.mode==='marcus'
+    ?`<button class="bub" style="color:var(--color-text-success)" onclick="closeOv()"><i class="ti ti-check" style="font-size:12px" aria-hidden="true"></i> Helpful</button>`
+    :`<button class="bub" onclick="closeOv()"><i class="ti ti-edit" style="font-size:12px" aria-hidden="true"></i> Add update</button>`;
+  return`<div class="ov" onclick="if(event.target===this)closeOv()">
+    <div class="pcard">
+      <div class="pcH">
+        <div class="pb" style="background:${p.bg};color:${p.color}"><span>${p.icon}</span><span>${p.type}</span></div>
+        <button class="px2" onclick="closeOv()" aria-label="Close"><i class="ti ti-x" style="font-size:12px" aria-hidden="true"></i></button>
+      </div>
+      <div class="pcB">
+        <div style="font-size:11px;color:var(--color-text-secondary);margin-bottom:11px">${p.address}</div>
+        ${cs}${act}
+      </div>
+    </div>
+  </div>`;
+}
+
+function addrOv(){
+  const ps=PINS.filter(p=>[1,2,3].includes(p.id));
+  return`<div class="ov" onclick="if(event.target===this)closeOv()">
+    <div class="als">
+      <div class="alH">
+        <button class="abk" onclick="closeOv()"><i class="ti ti-arrow-left" style="font-size:11px;margin-right:3px" aria-hidden="true"></i>Back</button>
+        <div style="font-size:16px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px">847 Maple St NW</div>
+        <div style="font-size:12px;color:var(--color-text-secondary)">${ps.length} field notes — read before starting work</div>
+      </div>
+      <div class="asc">
+        ${ps.map(p=>`<div class="ai" onclick="pinFromAddr(${p.id})">
+          <div class="adot" style="background:${p.color}">${p.icon}</div>
+          <div style="min-width:0">
+            <div style="font-size:12px;font-weight:500;color:${p.color};margin-bottom:2px">${p.type}</div>
+            <div style="font-size:13px;color:var(--color-text-primary);line-height:1.5;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">${p.comments[0].text}</div>
+            <div style="font-size:11px;color:var(--color-text-secondary)">${p.comments[0].a} · ${p.comments.length} note${p.comments.length!==1?'s':''}</div>
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+function doneOv(){
+  return`<div class="sh" style="z-index:40">
+    <div class="hdl"></div>
+    <div style="text-align:center;padding:8px 0 12px">
+      <div style="font-size:34px;margin-bottom:12px">📍</div>
+      <div style="font-size:16px;font-weight:500;color:var(--color-text-primary);margin-bottom:6px">Pin saved</div>
+      <div style="font-size:13px;color:var(--color-text-secondary);margin-bottom:16px">Your note is now part of the living map.</div>
+      <button onclick="finSave()" style="padding:11px 26px;border-radius:20px;background:#1B3A5C;color:#fff;border:none;cursor:pointer;font-size:14px;font-weight:500;font-family:inherit">Back to map</button>
+    </div>
+  </div>`;
+}
+
+function voiceH(){
+  const isR=S.rec===1,isDone=S.rec===2;
+  const cats=[{c:'#DC2626',l:'Safety warning'},{c:'#D97706',l:'Equipment quirk'},{c:'#2563EB',l:'Historical pattern'},{c:'#059669',l:'Field tip'}];
+  return`<div class="vs">
+    <button class="vbk" onclick="backV()" aria-label="Cancel"><i class="ti ti-x" style="font-size:13px" aria-hidden="true"></i></button>
+    <div style="color:${isR?'#E84040':'rgba(255,255,255,.88)'};font-size:17px;font-weight:500">${isR?'Recording…':isDone?'Note recorded':'Voice note'}</div>
+    <div class="rbw">
+      ${isR?'<div class="rr r1"></div><div class="rr r2"></div>':''}
+      <button class="rbtn" onclick="togRec()" aria-label="${isR?'Stop':'Record'}">
+        ${isR?`<div style="width:19px;height:19px;border-radius:3px;background:white"></div>`:`<i class="ti ti-microphone" style="font-size:26px;color:white" aria-hidden="true"></i>`}
+      </button>
+    </div>
+    ${isR?`<div class="wbs">${Array(8).fill(0).map((_,i)=>`<div class="wb" style="background:#E84040;animation-delay:${i*.1}s"></div>`).join('')}</div>`:isDone?`<div style="color:rgba(255,255,255,.38);font-size:13px;text-align:center">Select a category to save.</div>`:`<div style="color:rgba(255,255,255,.38);font-size:13px;text-align:center;max-width:200px;line-height:1.5">Tap to start recording.<br>Tap again to stop.</div>`}
+    ${isDone?`<div style="position:absolute;bottom:0;left:0;right:0;background:var(--color-background-primary);border-radius:24px 24px 0 0;border-top:.5px solid var(--color-border-tertiary);padding:12px 18px 36px">
+      <div class="hdl"></div>
+      <div style="font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:12px">What type of note is this?</div>
+      <div class="catG">${cats.map(c=>`<button class="cat" onclick="savePinV()"><div class="cdot" style="background:${c.c}"></div><span class="catl">${c.l}</span></button>`).join('')}</div>
+    </div>`:''}
+  </div>`;
+}
+
+function cpH(){
+  const cnt=S.cpText.filter(t=>t&&t.trim().length>0).length;
+  const allFilled=cnt===3;
+
+  if(S.cpDone) return`<div class="cps">
+    <div class="cpHd"><button class="abk" onclick="finCp()">Done</button>
+    <div style="font-size:16px;font-weight:500;color:var(--color-text-primary);margin-top:8px">Checkpoint saved</div></div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:20px;text-align:center">
+      <div style="font-size:38px">✅</div>
+      <div style="font-size:15px;font-weight:500;color:var(--color-text-primary)">3 notes added to map</div>
+      <div style="font-size:13px;color:var(--color-text-secondary);line-height:1.5;max-width:240px">Switch to Marcus mode to see your checkpoint on the map.</div>
+      <button onclick="finCp()" style="margin-top:8px;padding:11px 26px;border-radius:20px;background:#059669;color:#fff;border:none;cursor:pointer;font-size:14px;font-weight:500;font-family:inherit">Back to map</button>
+    </div>
+  </div>`;
+
+  return`<div class="cps">
+    <div class="cpHd">
+      <button class="abk" onclick="backCp()"><i class="ti ti-x" style="font-size:11px;margin-right:3px" aria-hidden="true"></i>Cancel</button>
+      <div style="font-size:16px;font-weight:600;color:#1B3A5C;margin-top:8px">Job Checkpoint</div>
+      <div style="font-size:12px;color:var(--color-text-secondary);margin-top:2px">Type or use voice for each question to unlock submit.</div>
+    </div>
+    <div class="cpsc">
+      ${CP_QUESTIONS.map((q,i)=>{
+        const filled=S.cpText[i]&&S.cpText[i].trim().length>0;
+        const cls=filled?'qblk filled':`qblk ${i===S.cpText.findIndex(t=>!t||!t.trim())?'active':''}`;
+        return`<div class="${cls}">
+          <div class="qnum">Question ${i+1}</div>
+          <div class="qlbl">${q}</div>
+          <div class="qinrow">
+            <input id="cpi-${i}" class="qinput" type="text"
+              placeholder="Type your answer here…"
+              value="${(S.cpText[i]||'').replace(/"/g,'&quot;')}"
+              oninput="cpInput(${i},this.value)" />
+            <button id="cpv-${i}" class="qmic" onclick="togCpV(${i})" aria-label="Voice input">
+              <i class="ti ti-microphone" style="font-size:15px;color:var(--color-text-secondary)" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div id="cpw-${i}" class="qwv">
+            ${Array(8).fill(0).map((_,j)=>`<div class="wb" style="background:#1B3A5C;animation-delay:${j*.1}s"></div>`).join('')}
+            <span style="font-size:11px;color:var(--color-text-secondary);margin-left:8px">Recording… tap mic to stop</span>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="cpft">
+      <div style="font-size:12px;color:var(--color-text-secondary);text-align:center;margin-bottom:8px" id="cp-hint">
+        ${allFilled?'All filled — ready to save to map':`${cnt}/3 filled · type or use voice for each question`}
+      </div>
+      <button id="cp-sub" class="subbtn" onclick="${allFilled?'submitCp()':''}" ${allFilled?'':'disabled'}>
+        ${allFilled?'Save 3 checkpoint pins to map →':`Submit (${cnt}/3 complete)`}
+      </button>
+    </div>
+  </div>`;
+}
+
+function cpInput(i,val){
+  S.cpText[i]=val;
+  const cnt=S.cpText.filter(t=>t&&t.trim().length>0).length;
+  const all=cnt===3;
+  const btn=document.getElementById('cp-sub');
+  const hint=document.getElementById('cp-hint');
+  if(btn){btn.disabled=!all;btn.textContent=all?'Save 3 checkpoint pins to map →':`Submit (${cnt}/3 complete)`;}
+  if(hint) hint.textContent=all?'All filled — ready to save to map':`${cnt}/3 filled · type or use voice for each question`;
+  const block=document.getElementById(`cpi-${i}`)?.closest('.qblk');
+  if(block){
+    if(val&&val.trim().length>0){block.className='qblk filled';}
+    else{const fp=S.cpText.findIndex(t=>!t||!t.trim());block.className=`qblk ${fp===i?'active':''}`;}
+  }
+  S.cpInProgress=S.cpText.some(t=>t&&t.trim().length>0);
+}
+
+const SIM_ANSWERS=['Found minor corrosion on the west-facing meter base — not urgent, monitor next visit.','Check the left isolation valve first — it controls main supply for this entire block.','Zone 3 had a pressure drop in January 2023, caused by an upstream restriction that was resolved.'];
+
+function togCpV(i){
+  if(S.cpRecQ===i){
+    S.cpRecQ=-1;
+    const btn=document.getElementById(`cpv-${i}`);
+    if(btn){btn.style.background='';btn.querySelector('i').style.color='';}
+    const wv=document.getElementById(`cpw-${i}`);if(wv) wv.style.display='none';
+    const inp=document.getElementById(`cpi-${i}`);
+    if(inp){inp.value=SIM_ANSWERS[i]||'Noted.';cpInput(i,inp.value);}
+  } else {
+    if(S.cpRecQ!==-1) return;
+    S.cpRecQ=i;
+    const btn=document.getElementById(`cpv-${i}`);
+    if(btn){btn.style.background='#E84040';btn.querySelector('i').style.color='white';}
+    const wv=document.getElementById(`cpw-${i}`);if(wv) wv.style.display='flex';
+  }
+}
+
+function setMode(m){S.mode=m;S.ov=null;S.pin=null;S.screen='map';S.aprog=35;S.apl=false;clearInterval(aInt);R();}
+function openCap(){S.ov='cap';R();}
+function closeOv(){S.ov=null;S.pin=null;S.screen='map';S.rec=0;S.aprog=35;S.apl=false;clearInterval(aInt);R();}
+function clickPin(id){S.pin=id;S.ov='pin';S.aprog=35;S.apl=false;clearInterval(aInt);R();}
+function openVoice(){S.screen='voice';S.rec=0;R();}
+function openCp(){S.screen='cp';S.cpRecQ=-1;S.cpDone=false;R();}
+function backV(){S.screen='map';S.ov=null;S.rec=0;R();}
+function backCp(){S.screen='map';S.ov=null;S.cpRecQ=-1;R();}
+function togRec(){if(S.rec===0){S.rec=1;R();}else if(S.rec===1){S.rec=2;R();}}
+function submitCp(){
+  const sub=S.mode==='james'?'James Carter':'Marcus';
+  const ini=sub.split(' ').map(w=>w[0]).join('');
+  S.checkpointPins.push({
+    id:200+S.checkpointPins.length,x:158,y:282,
+    color:'#059669',icon:'✓',type:'Job Checkpoint',
+    bg:'rgba(5,150,105,.12)',address:'Current Job Location',
+    isNew:true,isCheckpoint:true,
+    answers:[...S.cpText]
+  });
+  S.cpDone=true;S.cpInProgress=false;
+  S.cpText=['','',''];
+  R();
+}
+function finCp(){S.screen='map';S.cpDone=false;S.cpRecQ=-1;R();}
+function savePinV(){S.screen='map';S.ov='done';S.rec=0;R();}
+function finSave(){S.ov=null;S.screen='map';R();}
+function showAddr(){S.ov='addr';R();}
+function pinFromAddr(id){S.pin=id;S.ov='pin';S.aprog=35;S.apl=false;R();}
+function togAudio(){
+  S.apl=!S.apl;
+  const ico=document.getElementById('aico');
+  if(ico) ico.className=S.apl?'ti ti-player-pause':'ti ti-player-play';
+  if(S.apl){aInt=setInterval(()=>{
+    S.aprog=Math.min(S.aprog+1.4,100);
+    const el=document.getElementById('apr');if(el) el.style.width=S.aprog+'%';
+    if(S.aprog>=100){S.apl=false;clearInterval(aInt);S.aprog=0;const ic=document.getElementById('aico');if(ic)ic.className='ti ti-player-play';}
+  },120);}else clearInterval(aInt);
+}
+
+R();
+</script>

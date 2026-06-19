@@ -1,0 +1,10 @@
+streamlit
+ollama
+pandas
+plotly
+requests
+chromadb
+sentence-transformers
+beautifulsoup4
+openpyxl
+python-dotenv
