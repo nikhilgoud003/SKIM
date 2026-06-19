@@ -1,0 +1,3 @@
+Problem statement :Retirement Transition
+Southern Company Gas is experiencing retirement transitions that risk losing critical operational and institutional knowledge – particularly across highly technical areas, like Gas Supply and Capacity Planning. Insights and analysis, such as year-over-year demand patterns, peak load timing, and pipeline constraints, often require necessary experienced interpretation to guide strategic decisions. This raises the need for a scalable solution that operationalizes this knowledge. What solutions or tools could we consider deploying to help reduce reliance on calling back retirees while also improving development and decision-making of active workforce employees?
+
